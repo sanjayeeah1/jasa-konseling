@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curheart — Ruang Aman & Konseling Online</title>
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-cream: #FAF8F5;
+      --bg-card: #FFFFFF;
+      --bg-soft: #F3EFEA;
+      --primary: #3E535B;
+      --primary-hover: #2E3F46;
+      --plum: #963B29;
+      --plum-soft: #FDF3F1;
+      --gold: #B78A20;
+      --gold-soft: #FBF6EA;
+      --text-main: #243137;
+      --text-muted: #5C6B73;
+      --border: #EAE4DC;
+      --shadow-sm: 0 4px 16px rgba(62, 83, 91, 0.05);
+      --shadow-md: 0 12px 32px rgba(62, 83, 91, 0.09);
+      --shadow-lg: 0 24px 48px rgba(36, 49, 55, 0.16);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-pill: 999px;
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE STYLES
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    body {
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       3. BUTTONS & BADGES
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(62, 83, 91, 0.2);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-plum {
+      background-color: var(--plum);
+      color: #FFFFFF;
+      box-shadow: 0 6px 18px rgba(150, 59, 41, 0.2);
+    }
+
+    .btn-plum:hover {
+      background-color: #7D3021;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--border);
+      color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background-color: rgba(62, 83, 91, 0.04);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      padding: 8px 14px;
+    }
+
+    .btn-ghost:hover {
+      color: var(--primary);
+      background: var(--bg-soft);
+    }
+
+    .btn-sm {
+      padding: 9px 16px;
+      font-size: 0.875rem;
+    }
+
+    .badge-safe {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background-color: var(--plum-soft);
+      color: var(--plum);
+      border: 1px solid rgba(150, 59, 41, 0.16);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    /* ==========================================================================
+       4. STICKY NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(250, 248, 245, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--plum), #B84D38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      box-shadow: 0 4px 12px rgba(150, 59, 41, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--plum);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .user-role-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--gold-soft);
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       5. HERO SECTION
+       ========================================================================== */
+    .hero {
+      padding: 64px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-content h1 {
+      margin-top: 20px;
+      font-size: clamp(2.25rem, 4.2vw, 3.35rem);
+      line-height: 1.16;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.03em;
+    }
+
+    .hero-content h1 span {
+      color: var(--plum);
+    }
+
+    .hero-subtitle {
+      margin-top: 20px;
+      font-size: 1.08rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-trust {
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .trust-item span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .hero-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius-md);
+    }
+
+    /* ==========================================================================
+       6. SECTION HEADERS & GRIDS (SERVICES & COUNSELORS)
+       ========================================================================== */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.35rem);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(62, 83, 91, 0.25);
+    }
+
+    .service-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .service-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--bg-cream);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+
+    /* Counselors Grid */
+    .counselors-section {
+      background-color: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .counselors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .counselor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .counselor-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .counselor-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      flex-shrink: 0;
+    }
+
+    .counselor-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--bg-cream);
+      box-shadow: 0 4px 12px rgba(62, 83, 91, 0.14);
+      background-color: var(--bg-soft);
+    }
+
+    .upload-photo-btn {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      background: var(--plum);
+      color: #FFFFFF;
+      border: 2px solid #FFFFFF;
+      border-radius: var(--radius-pill);
+      padding: 4px 8px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .upload-photo-btn:hover {
+      background: var(--primary);
+      transform: scale(1.05);
+    }
+
+    .counselor-info h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.3;
+    }
+
+    .counselor-credential {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
+
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid rgba(183, 138, 32, 0.25);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .rating-badge:hover {
+      background: #F5E9CE;
+    }
+
+    .specialty-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-cream);
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .counselor-bio {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .counselor-actions {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 10px;
+    }
+
+    /* ==========================================================================
+       7. PRIVACY & ABOUT SECTION
+       ========================================================================== */
+    .about-privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .info-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-panel.privacy-highlight {
+      background: linear-gradient(160deg, #FFFFFF 0%, #FBF8F3 100%);
+      border-color: rgba(183, 138, 32, 0.3);
+    }
+
+    .info-panel h3 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .info-panel p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-size: 0.97rem;
+    }
+
+    .check-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.94rem;
+      color: var(--text-main);
+    }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--plum-soft);
+      color: var(--plum);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-weight: 800;
+      font-size: 0.8rem;
+    }
+
+    .check-icon.gold {
+      background: var(--gold-soft);
+      color: var(--gold);
+    }
+
+    /* ==========================================================================
+       8. FOOTER
+       ========================================================================== */
+    .footer {
+      background-color: var(--primary);
+      color: #EAE4DC;
+      padding: 56px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+      gap: 40px;
+      padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-brand {
+      color: #FFFFFF;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .footer p {
+      font-size: 0.92rem;
+      color: rgba(250, 248, 245, 0.78);
+      line-height: 1.65;
+    }
+
+    .footer h4 {
+      color: #FFFFFF;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 0.92rem;
+      color: rgba(250, 248, 245, 0.8);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #FFFFFF;
+    }
+
+    .crisis-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 0.85rem;
+      line-height: 1.55;
+    }
+
+    .footer-bottom {
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: rgba(250, 248, 245, 0.65);
+    }
+
+    /* ==========================================================================
+       9. MODALS & INTERACTIVE OVERLAYS
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(36, 49, 55, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 30px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      animation: slideUp 0.25s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .close-modal {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-cream);
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .close-modal:hover {
+      background: var(--plum-soft);
+      color: var(--plum);
+    }
+
+    /* Role Selector & Auth Tabs */
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-cream);
+      padding: 4px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      padding: 9px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .auth-tab.active {
+      background: var(--bg-card);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .role-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .role-option {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      background: var(--bg-cream);
+    }
+
+    .role-option.selected {
+      border-color: var(--plum);
+      background: var(--plum-soft);
+      color: var(--plum);
+    }
+
+    .role-option strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+
+    .role-option span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background: #FFFFFF;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(62, 83, 91, 0.1);
+    }
+
+    /* Booking Pills */
+    .pill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .choice-pill {
+      padding: 10px 8px;
+      text-align: center;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-cream);
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .choice-pill.selected {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .booking-summary-box {
+      background: var(--bg-cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin: 16px 0;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      font-size: 0.9rem;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+    }
+
+    /* Reviews Modal */
+    .review-list {
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-right: 4px;
+    }
+
+    .review-item {
+      background: var(--bg-cream);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .review-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .review-author {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .review-text {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .star-input {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .star-btn {
+      background: none;
+      border: none;
+      font-size: 1.65rem;
+      color: #D5CEC4;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .star-btn.active,
+    .star-btn:hover {
+      color: var(--gold);
+      transform: scale(1.12);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.92rem;
+      font-weight: 600;
+      z-index: 2000;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       10. RESPONSIVE DESIGN (@media max-width: 900px)
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 0;
+        right: 0;
+        background: var(--bg-cream);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        padding: 20px 24px;
+        gap: 16px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+
+      .hero {
+        padding: 40px 0 56px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .services-grid,
+      .counselors-grid,
+      .about-privacy-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .counselor-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. STICKY TOP NAVBAR
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#beranda" class="brand">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+            <path d="M7 11h2.5l1.5-2.5 2 5 1.5-2.5H17"/>
+          </svg>
+        </span>
+        Curheart
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#beranda" onclick="closeMobileMenu()">Beranda</a>
+        <a href="#layanan" onclick="closeMobileMenu()">Layanan</a>
+        <a href="#konselor" onclick="closeMobileMenu()">Konselor</a>
+        <a href="#privasi-about" onclick="closeMobileMenu()">Privasi &amp; About</a>
+      </nav>
+
+      <div class="nav-actions" id="navActions">
+        <!-- Rendered dynamically by JS -->
+      </div>
+
+      <button class="mobile-menu-btn" aria-label="Buka Menu" onclick="toggleMobileMenu()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       2. HERO SECTION
+       ======================================================================== -->
+  <main id="beranda">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge-safe">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Ruang Aman &amp; Tanpa Menghakimi
+          </div>
+
+          <h1>From a heavy heart to <span>being truly heard</span></h1>
+
+          <p class="hero-subtitle">
+            Kamu tidak harus memikul semuanya sendirian. Curheart menghadirkan pendampingan psikologis yang hangat, rahasia, dan profesional untuk menemani setiap langkah pemulihan emosionalmu.
+          </p>
+
+          <div class="hero-cta">
+            <button class="btn btn-plum" onclick="openBookingModal()">
+              Mulai Konsultasi
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+            <a href="#layanan" class="btn btn-outline">Kenali Layanan</a>
+          </div>
+
+          <div class="hero-trust">
+            <div class="trust-item">
+              <strong>100% Rahasia</strong>
+              <span>Enkripsi &amp; Kode Etik</span>
+            </div>
+            <div class="trust-item">
+              <strong>Psikolog Berlisensi</strong>
+              <span>Terverifikasi HIMPSI / SIPP</span>
+            </div>
+            <div class="trust-item">
+              <strong>Fleksibel</strong>
+              <span>Chat, Voice, atau Video</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calm Warm Counseling Space SVG Illustration -->
+        <div class="hero-visual">
+          <svg viewBox="0 0 540 440" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustrasi ruang percakapan konseling yang hangat dan menenangkan">
+            <!-- Soft Warm Background -->
+            <rect width="540" height="440" rx="20" fill="#FAF8F5"/>
+            <circle cx="430" cy="95" r="78" fill="#FBF6EA"/>
+            <circle cx="110" cy="340" r="95" fill="#FDF3F1"/>
+
+            <!-- Window & Warm Sunlight -->
+            <rect x="195" y="42" width="150" height="175" rx="75" fill="#FFFFFF" stroke="#EAE4DC" stroke-width="3"/>
+            <path d="M270 42V217M195 130H345" stroke="#EAE4DC" stroke-width="2.5"/>
+            <circle cx="292" cy="92" r="18" fill="#F5DFAA" opacity="0.8"/>
+
+            <!-- Decorative Indoor Plant -->
+            <path d="M90 335C90 310 72 285 62 272C78 275 92 292 95 312C98 286 112 268 128 264C120 282 108 308 106 335H90Z" fill="#3E535B" opacity="0.85"/>
+            <rect x="82" y="332" width="32" height="36" rx="8" fill="#B78A20" opacity="0.85"/>
+
+            <!-- Left Person (Client sharing story) -->
+            <circle cx="176" cy="222" r="26" fill="#E8C3B0"/>
+            <path d="M150 218C150 200 164 190 178 190C193 190 204 202 204 218C204 212 195 206 178 206C162 206 150 212 150 218Z" fill="#3E535B"/>
+            <path d="M134 328C134 286 152 262 178 262C204 262 220 286 220 328H134Z" fill="#963B29"/>
+            <!-- Arm gesture -->
+            <path d="M196 284L232 298" stroke="#E8C3B0" stroke-width="11" stroke-linecap="round"/>
+
+            <!-- Right Person (Counselor listening empathetically) -->
+            <circle cx="364" cy="218" r="26" fill="#DFB59E"/>
+            <path d="M338 216C338 196 352 186 366 186C382 186 392 198 392 218C388 208 378 204 364 204C350 204 342 209 338 216Z" fill="#243137"/>
+            <path d="M320 328C320 284 338 260 364 260C390 260 408 284 408 328H320Z" fill="#3E535B"/>
+            <!-- Notebook in hand -->
+            <rect x="312" y="288" width="34" height="24" rx="4" transform="rotate(-12 312 288)" fill="#FBF6EA" stroke="#B78A20" stroke-width="2"/>
+
+            <!-- Warm Connection Chat Bubble & Heart -->
+            <rect x="224" y="164" width="92" height="54" rx="27" fill="#FFFFFF" stroke="#EAE4DC" stroke-width="2.5"/>
+            <path d="M270 201C270 201 255 191.5 255 182.5C255 177.8 258.6 174 263 174C265.7 174 268.2 175.4 270 177.6C271.8 175.4 274.3 174 277 174C281.4 174 285 177.8 285 182.5C285 191.5 270 201 270 201Z" fill="#963B29"/>
+
+            <!-- Cozy Sofa & Coffee Table -->
+            <rect x="112" y="324" width="316" height="22" rx="11" fill="#EAE4DC"/>
+            <rect x="234" y="312" width="72" height="12" rx="6" fill="#D5CEC4"/>
+            <!-- Warm Tea Mug -->
+            <rect x="260" y="294" width="18" height="18" rx="4" fill="#B78A20"/>
+            <path d="M265 286C265 282 268 281 268 277M273 286C273 282 276 281 276 277" stroke="#B78A20" stroke-width="2" stroke-linecap="round"/>
+
+            <!-- Ground Line -->
+            <line x1="64" y1="368" x2="476" y2="368" stroke="#EAE4DC" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         3. SERVICES SECTION
+         ======================================================================== -->
+    <section id="layanan">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Layanan Konseling</span>
+          <h2>Pendampingan yang Disesuaikan dengan Kebutuhanmu</h2>
+          <p>Pilih ruang cerita yang paling nyaman untuk kondisimu saat ini bersama praktisi psikologi yang empatik.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <article class="service-card">
+            <div>
+              <div class="service-icon" style="background: var(--plum-soft); color: var(--plum);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <h3>Konseling Individu</h3>
+              <p>Ruang privat untuk mengurai kecemasan, kelelahan emosional (burnout), luka batin, overthinking, hingga regulasi emosi sehari-hari.</p>
+            </div>
+            <div>
+              <div class="service-meta">
+                <span>⏱ 60 Menit / Sesi</span>
+                <span>•</span>
+                <span>Chat / Voice / Video</span>
+              </div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="openBookingModal('Konseling Individu')">
+                Pilih Layanan
+              </button>
+            </div>
+          </article>
+
+          <!-- Service 2 -->
+          <article class="service-card">
+            <div>
+              <div class="service-icon" style="background: var(--gold-soft); color: var(--gold);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3>Konseling Pasangan &amp; Keluarga</h3>
+              <p>Memperbaiki pola komunikasi, menyelesaikan konflik relasi secara sehat, dan membangun kembali rasa aman bersama pasangan atau keluarga.</p>
+            </div>
+            <div>
+              <div class="service-meta">
+                <span>⏱ 75 Menit / Sesi</span>
+                <span>•</span>
+                <span>Voice / Video Call</span>
+              </div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="openBookingModal('Konseling Pasangan & Keluarga')">
+                Pilih Layanan
+              </button>
+            </div>
+          </article>
+
+          <!-- Service 3 -->
+          <article class="service-card">
+            <div>
+              <div class="service-icon" style="background: rgba(62, 83, 91, 0.1); color: var(--primary);">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                </svg>
+              </div>
+              <h3>Pengembangan Diri &amp; Karier</h3>
+              <p>Eksplorasi potensi diri, menetapkan batasan sehat (healthy boundaries), mengatasi kebingungan arah karier, dan membangun kepercayaan diri.</p>
+            </div>
+            <div>
+              <div class="service-meta">
+                <span>⏱ 60 Menit / Sesi</span>
+                <span>•</span>
+                <span>Chat / Voice / Video</span>
+              </div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="openBookingModal('Pengembangan Diri & Karier')">
+                Pilih Layanan
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         4. COUNSELORS SECTION
+         ======================================================================== -->
+    <section id="konselor" class="counselors-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Konselor Kami</span>
+          <h2>Temukan Teman Cerita yang Tepat Untukmu</h2>
+          <p>Seluruh psikolog klinis dan konselor di Curheart memiliki izin praktik resmi dan siap mendengarkan tanpa menghakimi.</p>
+        </div>
+
+        <div class="counselors-grid" id="counselorsGrid">
+          <!-- Rendered dynamically by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         5. PRIVACY & ABOUT SECTION
+         ======================================================================== -->
+    <section id="privasi-about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Privasi &amp; Tentang Curheart</span>
+          <h2>Keamanan Ceritamu adalah Prioritas Utama Kami</h2>
+          <p>Kami merancang Curheart sebagai tempat pulang yang aman saat dunia terasa terlalu bising.</p>
+        </div>
+
+        <div class="about-privacy-grid">
+          <!-- About Card -->
+          <div class="info-panel">
+            <h3>Tentang Curheart</h3>
+            <p>
+              Curheart lahir dari keyakinan bahwa mencari bantuan profesional bukanlah tanda kelemahan, melainkan bentuk keberanian untuk merawat diri sendiri.
+            </p>
+            <ul class="check-list">
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Pendekatan Hangat &amp; Berpusat pada Klien:</strong> Setiap sesi berjalan sesuai ritme kenyamananmu tanpa paksaan.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Bebas Stigma:</strong> Apapun latar belakang dan perasaanmu, kamu berhak didengar secara utuh.</div>
+              </li>
+              <li>
+                <span class="check-icon">✓</span>
+                <div><strong>Akses Mudah dari Mana Saja:</strong> Konsultasi dari kenyamanan kamarmu tanpa perlu menghadapi macet atau ruang tunggu.</div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Privacy Card -->
+          <div class="info-panel privacy-highlight">
+            <h3>Jaminan Kerahasiaan &amp; Privasi</h3>
+            <p>
+              Kami menjaga ketat setiap informasi, catatan sesi, dan identitas yang kamu bagikan selama menggunakan layanan Curheart.
+            </p>
+            <ul class="check-list">
+              <li>
+                <span class="check-icon gold">🔒</span>
+                <div><strong>Enkripsi Percakapan End-to-End:</strong> Seluruh pesan teks dan panggilan suara/video terlindungi secara teknis.</div>
+              </li>
+              <li>
+                <span class="check-icon gold">📜</span>
+                <div><strong>Patuh Kode Etik Psikologi:</strong> Konselor terikat sumpah kerahasiaan profesi dan tidak akan membagikan datamu ke pihak ketiga.</div>
+              </li>
+              <li>
+                <span class="check-icon gold">🛡️</span>
+                <div><strong>Opsi Nama Samaran (Anonimitas):</strong> Kamu bebas menggunakan nama panggilan pilihanmu saat mendaftar sebagai klien.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       6. FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <span class="brand-icon" style="width: 32px; height: 32px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+              </svg>
+            </span>
+            Curheart
+          </div>
+          <p>Your feelings matter, Your story matters. Layanan konseling psikologis daring yang hangat, aman, dan profesional di Indonesia.</p>
+        </div>
+
+        <div>
+          <h4>Tautan Cepat</h4>
+          <ul class="footer-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#layanan">Layanan Konseling</a></li>
+            <li><a href="#konselor">Daftar Konselor</a></li>
+            <li><a href="#privasi-about">Privasi &amp; Kode Etik</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Layanan Darurat</h4>
+          <div class="crisis-box">
+            <strong>Catatan Penting:</strong> Curheart bukan layanan gawat darurat medis. Jika kamu atau orang terdekat sedang dalam krisis atau bahaya menyakiti diri, segera hubungi <strong>Layanan SEJIWA 119 (ext. 8)</strong> atau kunjungi IGD rumah sakit terdekat.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Curheart Indonesia. Seluruh hak cipta dilindungi.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL 1: AUTH MODAL (LOGIN / DAFTAR)
+       ======================================================================== -->
+  <div class="modal-overlay" id="authModal" onclick="closeOnBackdrop(event, 'authModal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="authModalTitle">Masuk ke Curheart</h3>
+        <button class="close-modal" onclick="closeModal('authModal')" aria-label="Tutup">&times;</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLogin" onclick="switchAuthMode('login')">Login</button>
+        <button type="button" class="auth-tab" id="tabRegister" onclick="switchAuthMode('register')">Daftar Akun</button>
+      </div>
+
+      <form onsubmit="handleAuthSubmit(event)">
+        <div class="form-group">
+          <label>Masuk Sebagai</label>
+          <div class="role-selector">
+            <div class="role-option selected" id="roleKlien" onclick="selectRole('Klien')">
+              <strong>Klien</strong>
+              <span>Cari ruang cerita</span>
+            </div>
+            <div class="role-option" id="roleKonselor" onclick="selectRole('Konselor')">
+              <strong>Konselor</strong>
+              <span>Psikolog / Praktisi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" id="authNameGroup" style="display: none;">
+          <label for="authName">Nama Lengkap / Panggilan</label>
+          <input type="text" id="authName" class="form-control" placeholder="Contoh: Nadia Pratama" />
+        </div>
+
+        <div class="form-group">
+          <label for="authEmail">Alamat Email</label>
+          <input type="email" id="authEmail" class="form-control" placeholder="nama@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="authPassword">Kata Sandi</label>
+          <input type="password" id="authPassword" class="form-control" placeholder="Minimal 6 karakter" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;" id="authSubmitBtn">
+          Masuk Sekarang
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: BOOKING MODAL (JADWALKAN KONSULTASI)
+       ======================================================================== -->
+  <div class="modal-overlay" id="bookingModal" onclick="closeOnBackdrop(event, 'bookingModal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Jadwalkan Konsultasi</h3>
+        <button class="close-modal" onclick="closeModal('bookingModal')" aria-label="Tutup">&times;</button>
+      </div>
+
+      <!-- Form View -->
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+        <div class="form-group">
+          <label for="bookingService">Pilih Layanan</label>
+          <select id="bookingService" class="form-control" required>
+            <option value="Konseling Individu">Konseling Individu (60 Menit)</option>
+            <option value="Konseling Pasangan & Keluarga">Konseling Pasangan &amp; Keluarga (75 Menit)</option>
+            <option value="Pengembangan Diri & Karier">Pengembangan Diri &amp; Karier (60 Menit)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingCounselor">Pilih Konselor</label>
+          <select id="bookingCounselor" class="form-control" required>
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingDate">Tanggal Sesi</label>
+          <input type="date" id="bookingDate" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label>Pilih Waktu Sesi (WIB)</label>
+          <div class="pill-grid" id="timeSlotsGrid">
+            <div class="choice-pill selected" onclick="selectBookingPill('time', this, '10:00 WIB')">10:00 WIB</div>
+            <div class="choice-pill" onclick="selectBookingPill('time', this, '14:00 WIB')">14:00 WIB</div>
+            <div class="choice-pill" onclick="selectBookingPill('time', this, '19:00 WIB')">19:00 WIB</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Media Konseling</label>
+          <div class="pill-grid" id="formatPillsGrid">
+            <div class="choice-pill selected" onclick="selectBookingPill('format', this, 'Chat')">💬 Chat</div>
+            <div class="choice-pill" onclick="selectBookingPill('format', this, 'Voice Call')">🎙️ Voice</div>
+            <div class="choice-pill" onclick="selectBookingPill('format', this, 'Video Call')">📹 Video</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingNote">Catatan Singkat untuk Konselor (Opsional)</label>
+          <textarea id="bookingNote" rows="3" class="form-control" placeholder="Ceritakan sedikit hal yang ingin kamu bahas agar konselor dapat bersiap..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-plum" style="width: 100%;">Konfirmasi Jadwal Sesi</button>
+      </form>
+
+      <!-- Confirmation View -->
+      <div id="bookingConfirmation" style="display: none;">
+        <div style="text-align: center; margin-bottom: 16px;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--gold-soft); color: var(--gold); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 10px;">✓</div>
+          <h4 style="font-size: 1.2rem; color: var(--primary);">Jadwal Berhasil Dibuat!</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Ruang konseling pribadimu telah disiapkan.</p>
+        </div>
+
+        <div class="booking-summary-box" id="bookingSummaryContent">
+          <!-- Populated dynamically -->
+        </div>
+
+        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="closeModal('bookingModal')">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 3: REVIEW MODAL (ULASAN KLIEN)
+       ======================================================================== -->
+  <div class="modal-overlay" id="reviewModal" onclick="closeOnBackdrop(event, 'reviewModal')">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <h3 id="reviewModalTitle">Ulasan Klien</h3>
+          <p id="reviewModalSubtitle" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;"></p>
+        </div>
+        <button class="close-modal" onclick="closeModal('reviewModal')" aria-label="Tutup">&times;</button>
+      </div>
+
+      <div class="review-list" id="reviewListContainer">
+        <!-- Populated dynamically -->
+      </div>
+
+      <form onsubmit="handleReviewSubmit(event)" style="border-top: 1px solid var(--border); padding-top: 16px;">
+        <label style="display: block; font-size: 0.88rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">
+          Bagikan Pengalaman Konselingmu
+        </label>
+
+        <div class="star-input" id="starInputGroup">
+          <button type="button" class="star-btn active" data-val="1" onclick="setRatingInput(1)">★</button>
+          <button type="button" class="star-btn active" data-val="2" onclick="setRatingInput(2)">★</button>
+          <button type="button" class="star-btn active" data-val="3" onclick="setRatingInput(3)">★</button>
+          <button type="button" class="star-btn active" data-val="4" onclick="setRatingInput(4)">★</button>
+          <button type="button" class="star-btn active" data-val="5" onclick="setRatingInput(5)">★</button>
+        </div>
+
+        <div class="form-group">
+          <textarea id="reviewCommentInput" rows="2" class="form-control" placeholder="Tulis ulasan hangatmu di sini..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;">Kirim Ulasan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toastBox"></div>
+
+  <!-- ========================================================================
+       JAVASCRIPT APPLICATION STATE & INTERACTIVITY
+       ======================================================================== -->
+  <script>
+    // ------------------------------------------------------------------------
+    // 1. INITIAL DATA & STATE
+    // ------------------------------------------------------------------------
+    const state = {
+      currentUser: null, // { name: string, email: string, role: 'Klien' | 'Konselor' }
+      authMode: 'login', // 'login' | 'register'
+      selectedRole: 'Klien',
+      selectedTime: '10:00 WIB',
+      selectedFormat: 'Chat',
+      activeReviewCounselorId: null,
+      newReviewStars: 5,
+      counselors: [
+        {
+          id: 1,
+          name: 'Ratna Wijaya, M.Psi., Psikolog',
+          credential: 'Psikolog Klinis Dewasa • SIPP 20210482',
+          tags: ['Kecemasan', 'Burnout', 'Self-Esteem'],
+          bio: 'Mendampingi individu melewati fase kelelahan mental dan kecemasan dengan pendekatan Cognitive Behavioral Therapy (CBT) dan Mindfulness.',
+          avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80',
+          reviews: [
+            { author: 'Alya (Klien)', stars: 5, text: 'Kak Ratna mendengarkan dengan sangat sabar tanpa menghakimi. Setelah 2 sesi, pikiranku jauh lebih terurai.' },
+            { author: 'Dimas R.', stars: 5, text: 'Sangat membantu saat aku mengalami burnout kerja. Pertanyaannya tepat sasaran dan menenangkan.' }
+          ]
+        },
+        {
+          id: 2,
+          name: 'Bagas Prakoso, M.Psi., Psikolog',
+          credential: 'Psikolog Keluarga & Relasi • SIPP 20190915',
+          tags: ['Relasi & Pasangan', 'Komunikasi', 'Konflik Keluarga'],
+          bio: 'Fokus membantu pasangan dan keluarga membangun komunikasi asertif serta memulihkan kepercayaan dalam hubungan interpersonal.',
+          avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80',
+          reviews: [
+            { author: 'Sari & Raka', stars: 5, text: 'Sesi konseling pasangan bersama Mas Bagas membuka sudut pandang baru yang membuat kami saling memahami lagi.' },
+            { author: 'Melati P.', stars: 4, text: 'Penjelasannya runtut, hangat, dan solusinya sangat praktis untuk diterapkan di rumah.' }
+          ]
+        },
+        {
+          id: 3,
+          name: 'Nadia Kusuma, M.Psi., Psikolog',
+          credential: 'Psikolog Klinis & Karier • SIPP 20220134',
+          tags: ['Quarter-Life Crisis', 'Overthinking', 'Trauma Ringan'],
+          bio: 'Menemani dewasa muda menemukan arah hidup, menetapkan batasan sehat, dan berdamai dengan masa lalu secara bertahap.',
+          avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=300&q=80',
+          reviews: [
+            { author: 'Fajar K.', stars: 5, text: 'Rasanya seperti ngobrol dengan sahabat yang mengerti ilmu psikologi. Benar-benar ruang aman!' },
+            { author: 'Clara T.', stars: 5, text: 'Terima kasih Mbak Nadia sudah menemani prosesku berdamai dengan quarter-life crisis.' }
+          ]
+        }
+      ]
+    };
+
+    // ------------------------------------------------------------------------
+    // 2. INITIALIZATION ON DOM LOAD
+    // ------------------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNavbarActions();
+      renderCounselors();
+      populateCounselorSelect();
+      setMinBookingDate();
+    });
+
+    function setMinBookingDate() {
+      const dateInput = document.getElementById('bookingDate');
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.min = today;
+      dateInput.value = today;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toastBox');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3200);
+    }
+
+    // ------------------------------------------------------------------------
+    // 3. NAVBAR & AUTHENTICATION LOGIC
+    // ------------------------------------------------------------------------
+    function toggleMobileMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+
+    function renderNavbarActions() {
+      const container = document.getElementById('navActions');
+      if (state.currentUser) {
+        container.innerHTML = `
+          <div class="user-pill">
+            <span>Halo, ${escapeHtml(state.currentUser.name)}</span>
+            <span class="user-role-tag">${escapeHtml(state.currentUser.role)}</span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="handleLogout()">Logout</button>
+        `;
+      } else {
+        container.innerHTML = `
+          <button class="btn btn-ghost btn-sm" onclick="openAuthModal('login')">Login</button>
+          <button class="btn btn-primary btn-sm" onclick="openAuthModal('register')">Daftar</button>
+        `;
+      }
+    }
+
+    function openAuthModal(mode = 'login') {
+      switchAuthMode(mode);
+      openModal('authModal');
+    }
+
+    function switchAuthMode(mode) {
+      state.authMode = mode;
+      const isRegister = mode === 'register';
+      document.getElementById('tabLogin').classList.toggle('active', !isRegister);
+      document.getElementById('tabRegister').classList.toggle('active', isRegister);
+      document.getElementById('authModalTitle').textContent = isRegister ? 'Daftar Akun Curheart' : 'Masuk ke Curheart';
+      document.getElementById('authNameGroup').style.display = isRegister ? 'block' : 'none';
+      document.getElementById('authName').required = isRegister;
+      document.getElementById('authSubmitBtn').textContent = isRegister ? 'Buat Akun Sekarang' : 'Masuk Sekarang';
+    }
+
+    function selectRole(role) {
+      state.selectedRole = role;
+      document.getElementById('roleKlien').classList.toggle('selected', role === 'Klien');
+      document.getElementById('roleKonselor').classList.toggle('selected', role === 'Konselor');
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('authEmail').value.trim();
+      const rawName = document.getElementById('authName').value.trim();
+      const displayName = rawName || email.split('@')[0];
+
+      state.currentUser = {
+        name: displayName,
+        email: email,
+        role: state.selectedRole
+      };
+
+      renderNavbarActions();
+      renderCounselors(); // Re-render to show/hide "Ganti Foto" button for Counselors
+      closeModal('authModal');
+      showToast(`Selamat datang, ${displayName} (${state.selectedRole})!`);
+    }
+
+    function handleLogout() {
+      state.currentUser = null;
+      renderNavbarActions();
+      renderCounselors();
+      showToast('Kamu telah keluar dari akun.');
+    }
+
+    // ------------------------------------------------------------------------
+    // 4. COUNSELORS RENDERING & PHOTO UPLOAD (COUNSELOR ROLE)
+    // ------------------------------------------------------------------------
+    function calculateAverageRating(reviews) {
+      if (!reviews || reviews.length === 0) return '5.0';
+      const sum = reviews.reduce((acc, item) => acc + item.stars, 0);
+      return (sum / reviews.length).toFixed(1);
+    }
+
+    function renderCounselors() {
+      const grid = document.getElementById('counselorsGrid');
+      const isCounselorLoggedIn = state.currentUser && state.currentUser.role === 'Konselor';
+
+      grid.innerHTML = state.counselors.map(c => {
+        const avgRating = calculateAverageRating(c.reviews);
+        const fallbackAvatar = `https://placehold.co/150x150/EAE4DC/3E535B?text=${encodeURIComponent(c.name.charAt(0))}`;
+
+        return `
+          <article class="counselor-card">
+            <div>
+              <div class="counselor-top">
+                <div class="avatar-wrapper">
+                  <img
+                    src="${c.avatar}"
+                    alt="Foto profil ${escapeHtml(c.name)}"
+                    class="counselor-avatar"
+                    onerror="this.onerror=null;this.src='${fallbackAvatar}';"
+                  />
+                  ${isCounselorLoggedIn ? `
+                    <label class="upload-photo-btn" title="Unggah foto profil baru">
+                      Ganti Foto
+                      <input type="file" accept="image/*" style="display: none;" onchange="handleAvatarUpload(event, ${c.id})" />
+                    </label>
+                  ` : ''}
+                </div>
+
+                <div class="counselor-info">
+                  <h3>${escapeHtml(c.name)}</h3>
+                  <div class="counselor-credential">${escapeHtml(c.credential)}</div>
+                  <button type="button" class="rating-badge" onclick="openReviewModal(${c.id})" title="Lihat semua ulasan">
+                    ★ ${avgRating} (${c.reviews.length} ulasan)
+                  </button>
+                </div>
+              </div>
+
+              <div class="specialty-tags">
+                ${c.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+              </div>
+
+              <p class="counselor-bio">${escapeHtml(c.bio)}</p>
+            </div>
+
+            <div class="counselor-actions">
+              <button type="button" class="btn btn-outline btn-sm" onclick="openReviewModal(${c.id})">
+                Lihat Ulasan
+              </button>
+              <button type="button" class="btn btn-primary btn-sm" onclick="openBookingModal(null, ${c.id})">
+                Jadwalkan Sesi
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function handleAvatarUpload(event, counselorId) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const counselor = state.counselors.find(item => item.id === counselorId);
+        if (counselor) {
+          counselor.avatar = e.target.result;
+          renderCounselors();
+          showToast(`Foto profil ${counselor.name} berhasil diperbarui!`);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // ------------------------------------------------------------------------
+    // 5. BOOKING MODAL LOGIC
+    // ------------------------------------------------------------------------
+    function populateCounselorSelect() {
+      const select = document.getElementById('bookingCounselor');
+      select.innerHTML = state.counselors.map(c =>
+        `<option value="${c.id}">${escapeHtml(c.name)}</option>`
+      ).join('');
+    }
+
+    function openBookingModal(preselectedService = null, counselorId = null) {
+      // Reset view to form
+      document.getElementById('bookingForm').style.display = 'block';
+      document.getElementById('bookingConfirmation').style.display = 'none';
+
+      if (preselectedService) {
+        document.getElementById('bookingService').value = preselectedService;
+      }
+      if (counselorId) {
+        document.getElementById('bookingCounselor').value = String(counselorId);
+      }
+      openModal('bookingModal');
+    }
+
+    function selectBookingPill(type, element, value) {
+      const parent = element.parentElement;
+      parent.querySelectorAll('.choice-pill').forEach(pill => pill.classList.remove('selected'));
+      element.classList.add('selected');
+
+      if (type === 'time') state.selectedTime = value;
+      if (type === 'format') state.selectedFormat = value;
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const service = document.getElementById('bookingService').value;
+      const counselorId = Number(document.getElementById('bookingCounselor').value);
+      const counselor = state.counselors.find(c => c.id === counselorId);
+      const dateVal = document.getElementById('bookingDate').value;
+      const noteVal = document.getElementById('bookingNote').value.trim();
+
+      const clientName = state.currentUser ? state.currentUser.name : 'Tamu Curheart';
+
+      const summaryHtml = `
+        <div class="summary-row"><span>Nama Klien</span><strong>${escapeHtml(clientName)}</strong></div>
+        <div class="summary-row"><span>Layanan</span><strong>${escapeHtml(service)}</strong></div>
+        <div class="summary-row"><span>Konselor</span><strong>${escapeHtml(counselor ? counselor.name : '-')}</strong></div>
+        <div class="summary-row"><span>Jadwal</span><strong>${escapeHtml(dateVal)} • ${escapeHtml(state.selectedTime)}</strong></div>
+        <div class="summary-row"><span>Media Sesi</span><strong>${escapeHtml(state.selectedFormat)}</strong></div>
+        ${noteVal ? `<div class="summary-row"><span>Catatan</span><strong>"${escapeHtml(noteVal)}"</strong></div>` : ''}
+      `;
+
+      document.getElementById('bookingSummaryContent').innerHTML = summaryHtml;
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('bookingConfirmation').style.display = 'block';
+      showToast('Jadwal konsultasimu telah dikonfirmasi!');
+    }
+
+    // ------------------------------------------------------------------------
+    // 6. REVIEW MODAL LOGIC
+    // ------------------------------------------------------------------------
+    function openReviewModal(counselorId) {
+      state.activeReviewCounselorId = counselorId;
+      const counselor = state.counselors.find(c => c.id === counselorId);
+      if (!counselor) return;
+
+      const avg = calculateAverageRating(counselor.reviews);
+      document.getElementById('reviewModalTitle').textContent = `Ulasan untuk ${counselor.name.split(',')[0]}`;
+      document.getElementById('reviewModalSubtitle').textContent = `Rating rata-rata ★ ${avg} dari ${counselor.reviews.length} ulasan klien`;
+
+      renderReviewList(counselor.reviews);
+      setRatingInput(5);
+      document.getElementById('reviewCommentInput').value = '';
+      openModal('reviewModal');
+    }
+
+    function renderReviewList(reviews) {
+      const container = document.getElementById('reviewListContainer');
+      if (!reviews.length) {
+        container.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 16px;">Belum ada ulasan untuk konselor ini.</p>`;
+        return;
+      }
+
+      container.innerHTML = reviews.map(r => {
+        const starsStr = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+        return `
+          <div class="review-item">
+            <div class="review-item-header">
+              <span class="review-author">${escapeHtml(r.author)}</span>
+              <span class="review-stars">${starsStr}</span>
+            </div>
+            <p class="review-text">${escapeHtml(r.text)}</p>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setRatingInput(val) {
+      state.newReviewStars = val;
+      const buttons = document.querySelectorAll('#starInputGroup .star-btn');
+      buttons.forEach(btn => {
+        const starVal = Number(btn.getAttribute('data-val'));
+        btn.classList.toggle('active', starVal <= val);
+      });
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const comment = document.getElementById('reviewCommentInput').value.trim();
+      if (!comment) return;
+
+      const counselor = state.counselors.find(c => c.id === state.activeReviewCounselorId);
+      if (!counselor) return;
+
+      const authorName = state.currentUser ? `${state.currentUser.name} (${state.currentUser.role})` : 'Klien Anonim';
+      counselor.reviews.unshift({
+        author: authorName,
+        stars: state.newReviewStars,
+        text: comment
+      });
+
+      const avg = calculateAverageRating(counselor.reviews);
+      document.getElementById('reviewModalSubtitle').textContent = `Rating rata-rata ★ ${avg} dari ${counselor.reviews.length} ulasan klien`;
+      renderReviewList(counselor.reviews);
+      renderCounselors(); // Update rating badge on card
+      document.getElementById('reviewCommentInput').value = '';
+      showToast('Terima kasih atas ulasan hangatmu!');
+    }
+
+    // ------------------------------------------------------------------------
+    // 7. MODAL HELPERS & SECURITY SANITIZER
+    // ------------------------------------------------------------------------
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function closeOnBackdrop(event, id) {
+      if (event.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+</body>
+</html>
